@@ -82,3 +82,61 @@
 - 单文件 `handoff/HANDOFF.md` 适合少量任务起步。
 - 任务变多 → 拆成 `handoff/tasks/TASK-001.md` 每任务一文件，便于并行与审计。
 - 每完成一个里程碑，把结论同步进 `progress.md`，保持跨 session 状态。
+
+---
+
+## 6. Fast Autonomy Mode（默认工作模式）
+
+从现在开始，默认采用快速半自动执行模式。
+
+Claude 负责理解用户目标、给出方向和关键约束。
+Codex 负责直接执行工程任务，不需要对普通安全操作逐步等待 ACK。
+
+### Codex 可以自动执行
+
+Codex 可以直接执行以下低风险操作：
+
+- 读取项目源码、文档、日志摘要和配置文件
+- 搜索代码和静态分析
+- 修改普通软件文件、脚本、Markdown、测试、报告
+- 新增工具脚本、dry-run demo、validator、adapter、diagnostic
+- 运行 py_compile、pytest、grep、find、git diff、git status 等本地静态检查
+- 生成 handoff/RESULT.md 或报告文件
+- 提交前整理变更摘要
+
+### Codex 必须暂停并询问 David
+
+遇到以下动作必须暂停，明确说明将执行的命令和风险，等待 David 确认：
+
+- 真实机器人运动或任何可能驱动机械臂、底盘、夹爪、腰部、末端执行器的命令
+- 启动 ROS、driver、controller、GDK runtime、hardware service
+- 运行 move_*、industrial_*、rack_*、run_*、offset_* 等可能控制机器人或任务流程的脚本
+- SSH 到机器人后执行非只读命令
+- sudo、安装依赖、curl | bash、系统服务修改
+- 修改 emergency stop、torque、velocity、current、joint limit、safety gate、controller safety logic
+- 读取 secrets、.env、SSH key、token、credential
+- 读取 dataset、checkpoint、rosbag，除非任务明确授权
+- 删除大量文件、rm -rf、reset --hard、清空目录
+- git push、merge、rebase、force push
+- 任何超过用户目标范围的改动
+
+### 结果要求
+
+Codex 完成任务后必须写：
+
+`handoff/RESULT.md`
+
+内容包括：
+
+- 做了什么
+- 改了哪些文件
+- 运行了哪些命令
+- 测试/检查结果
+- 是否触及任何风险边界
+- 下一步建议
+
+### 原则
+
+普通软件开发：自动执行。  
+硬件、系统、凭证、远程机器人、不可逆操作：暂停确认。
+
