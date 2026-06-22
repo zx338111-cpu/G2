@@ -1,0 +1,92 @@
+{
+  "task_id": "task_0007_vla_negative_fixture_validator",
+  "title": "Create negative VLA dry-run fixture and verify validator failure",
+  "role": "execution_engineer",
+  "risk_level": "low",
+  "objective": "Create an intentionally invalid VLA dry-run JSONL fixture and verify that the static validator fails with clear errors.",
+  "context": "task_0006 proved that a valid dry-run fixture passes validation. This task proves the validator can also reject malformed events before real logs, VLA outputs, or world-model traces are introduced.",
+  "allowed_files": [
+    ".ai_agents/fixtures/vla_dryrun_negative_sample.jsonl",
+    ".ai_agents/review/vla_dryrun_negative_validation_report.md",
+    ".ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "read_only_files": [
+    ".ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/review/vla_dryrun_validation_report.md",
+    ".ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "credentials",
+    "token",
+    "api_key",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "Validate this task with agent_guard.py before doing anything else.",
+    "Read only this task JSON and declared read_only_files.",
+    "Create .ai_agents/fixtures/vla_dryrun_negative_sample.jsonl with intentionally invalid JSONL events.",
+    "The negative fixture must include cases for: duplicate event_id, wrong action vector length, non-finite action value, unsupported critic label, safety_gate.allowed with wrong type, and invalid artifact_refs shape.",
+    "Run validate_vla_dryrun_jsonl.py on the negative fixture with --report. This validation is expected to fail, so use the declared command with || true.",
+    "Create .ai_agents/review/vla_dryrun_negative_validation_report.md.",
+    "The report must show Status FAIL and at least one error.",
+    "Create result_0007_vla_negative_fixture_validator.json.",
+    "The result JSON must record that the validator failure was expected and is the success evidence for this task.",
+    "Run the declared result_checker.py command after writing the result JSON.",
+    "Do not modify source code outside .ai_agents."
+  ],
+  "commands": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json",
+    "mkdir -p .ai_agents/fixtures",
+    "sed -n '1,260p' .ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    "sed -n '1,260p' .ai_agents/review/vla_contract_and_metric_schema.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "python3 .ai_agents/scripts/validate_vla_dryrun_jsonl.py .ai_agents/fixtures/vla_dryrun_negative_sample.jsonl --report .ai_agents/review/vla_dryrun_negative_validation_report.md || true",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json .ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "expected_outputs": [
+    ".ai_agents/fixtures/vla_dryrun_negative_sample.jsonl",
+    ".ai_agents/review/vla_dryrun_negative_validation_report.md",
+    ".ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "success_criteria": [
+    "vla_dryrun_negative_sample.jsonl is created.",
+    "The negative fixture includes duplicate event_id, wrong vector length, non-finite value, unsupported critic label, wrong safety_gate.allowed type, and invalid artifact_refs shape.",
+    "validate_vla_dryrun_jsonl.py produces vla_dryrun_negative_validation_report.md.",
+    "The negative validation report status is FAIL.",
+    "The report includes clear validation errors.",
+    "result_0007_vla_negative_fixture_validator.json is created.",
+    "result_checker.py passes for task_0007/result_0007.",
+    "No robot motion script, ROS driver, controller, dataset, checkpoint, rosbag, or secret is accessed.",
+    "No source code outside .ai_agents is modified."
+  ],
+  "stop_conditions": [
+    "Any command attempts to launch a robot, ROS, controller, or motion script.",
+    "Any command attempts to modify source code outside .ai_agents.",
+    "Any command attempts to read secrets, datasets, checkpoints, or rosbags.",
+    "A command requires sudo or installs system packages.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands.",
+    "AI-B needs a shell command not listed in task.commands."
+  ],
+  "max_time_minutes": 40,
+  "requires_human_approval": false
+}

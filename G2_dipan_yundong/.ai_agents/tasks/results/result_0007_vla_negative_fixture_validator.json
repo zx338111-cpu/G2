@@ -1,0 +1,52 @@
+{
+  "task_id": "task_0007_vla_negative_fixture_validator",
+  "status": "done",
+  "summary": "Created an intentionally invalid VLA dry-run JSONL fixture and verified that the static validator rejects it with clear errors. The validator FAIL result is expected and is the success evidence for this task.",
+  "files_changed": [
+    ".ai_agents/fixtures/vla_dryrun_negative_sample.jsonl",
+    ".ai_agents/review/vla_dryrun_negative_validation_report.md",
+    ".ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json",
+    "mkdir -p .ai_agents/fixtures",
+    "sed -n '1,260p' .ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    "sed -n '1,260p' .ai_agents/review/vla_contract_and_metric_schema.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "python3 .ai_agents/scripts/validate_vla_dryrun_jsonl.py .ai_agents/fixtures/vla_dryrun_negative_sample.jsonl --report .ai_agents/review/vla_dryrun_negative_validation_report.md || true",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json .ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0007_vla_negative_fixture_validator.json .ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/fixtures/vla_dryrun_negative_sample.jsonl",
+    ".ai_agents/review/vla_dryrun_negative_validation_report.md",
+    ".ai_agents/tasks/results/result_0007_vla_negative_fixture_validator.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed",
+    "validate_vla_dryrun_jsonl.py failed as expected for the negative fixture and generated the Markdown report",
+    "result_checker.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0007_vla_negative_fixture_validator passed guard checks",
+    "Read only the task JSON and declared read-only files",
+    "Created a seven-event negative JSONL fixture",
+    "Negative fixture covers duplicate event_id, wrong action vector length, non-finite action value, unsupported critic label, wrong safety_gate.allowed type, and invalid artifact_refs shape",
+    "{\"action_family_counts\": {\"dual_delta_14d\": 2, \"left_abs_8d\": 5}, \"critic_category_counts\": {\"action_invalid\": 2, \"controller_not_ready\": 1, \"safety_gate_blocked\": 1}, \"error_count\": 6, \"event_count\": 7, \"status\": \"FAIL\", \"warning_count\": 0}",
+    "OK: result stays within declared commands, allowed files, and status set"
+  ],
+  "expected_failure_evidence": {
+    "validator_status": "FAIL",
+    "validator_error_count": 6,
+    "validator_event_count": 7,
+    "why_successful": "The negative fixture is intentionally malformed, so validator failure proves the static validator rejects invalid VLA dry-run events before real logs, VLA outputs, or world-model traces are introduced."
+  },
+  "issues": [
+    "The negative fixture is synthetic and intentionally invalid; it should not be used as a passing dry-run sample.",
+    "The validator reports schema-level errors only; it does not evaluate live robot readiness, model quality, datasets, checkpoints, or controller behavior."
+  ],
+  "next_recommendation": [
+    "Create a follow-up documentation-only task to define how future CI or agent tasks should run both positive and negative VLA dry-run fixtures without robot access."
+  ]
+}
