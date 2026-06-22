@@ -43,3 +43,9 @@ Rules:
 - Do not include hidden requirements.
 - Do not rely on terminal guessing.
 - Every task must pass agent_guard.py before execution.
+- Declare every shell command AI-B may run in task.commands.
+- Include validation, read-only inspection, formatting, diff, and result_checker.py commands in task.commands whenever AI-B may need them.
+- Use exact command strings in task.commands so AI-B can compare requested commands without interpretation.
+- Include the task-specific result JSON path in allowed_files when AI-B must create or update it.
+- Require result_checker.py to pass before AI-A reviews the result or creates the next task.
+- If a future task may require a command, include it up front; AI-B must stop instead of running undeclared commands.

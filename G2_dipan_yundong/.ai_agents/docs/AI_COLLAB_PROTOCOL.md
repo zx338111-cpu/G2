@@ -30,6 +30,14 @@ Workflow:
 5. Claude reviews result JSON.
 6. User approves direction and all real robot work.
 
+Command Discipline:
+
+- Every shell command AI-B may run must be declared in the task.commands list before execution.
+- AI-B must not run shell commands that are missing from task.commands, even for inspection, validation, editing, or convenience.
+- If AI-B needs an undeclared shell command, AI-B must stop and request a revised task JSON instead of running the command.
+- AI-B result JSON must record only commands that were actually executed and that were declared in task.commands.
+- result_checker.py must pass on the task JSON and result JSON before AI-A review, before accepting the result, or before moving to the next task.
+
 Golden rule:
 
 Claude thinks.

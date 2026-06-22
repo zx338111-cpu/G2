@@ -1,0 +1,36 @@
+{
+  "task_id": "task_0004_protocol_hardening",
+  "status": "done",
+  "summary": "Hardened the dual-AI collaboration protocol and both role prompts so AI-B shell commands must be predeclared in task.commands and result_checker.py must pass before review or moving to the next task.",
+  "files_changed": [
+    ".ai_agents/docs/AI_COLLAB_PROTOCOL.md",
+    ".ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md",
+    ".ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    ".ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0004_protocol_hardening.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0004_protocol_hardening.json",
+    "sed -n '1,240p' .ai_agents/docs/AI_COLLAB_PROTOCOL.md",
+    "sed -n '1,240p' .ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md",
+    "sed -n '1,240p' .ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    "git diff -- .ai_agents/docs/AI_COLLAB_PROTOCOL.md .ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md .ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0004_protocol_hardening.json .ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "tests_run": [
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0004_protocol_hardening.json .ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "key_logs": [
+    "[OK] task_0004_protocol_hardening passed guard checks",
+    "Added Command Discipline to AI_COLLAB_PROTOCOL.md.",
+    "Updated AI_A_RESEARCH_DIRECTOR.md to require all AI-B shell commands in task.commands, including validation and result_checker commands.",
+    "Updated AI_B_EXECUTION_ENGINEER.md to refuse undeclared shell commands and keep result JSON inside allowed_files and task.commands."
+  ],
+  "issues": [],
+  "next_recommendation": [
+    "AI-A can review result_0004_protocol_hardening.json after result_checker.py passes."
+  ]
+}

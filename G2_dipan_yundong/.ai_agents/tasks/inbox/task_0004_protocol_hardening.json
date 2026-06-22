@@ -1,0 +1,86 @@
+{
+  "task_id": "task_0004_protocol_hardening",
+  "title": "Harden dual AI command discipline protocol",
+  "role": "execution_engineer",
+  "risk_level": "low",
+  "objective": "Update the dual-AI protocol and prompts so all future AI-B shell commands must be declared in task.commands and every result must be checked with result_checker.py before review.",
+  "context": "task_0003 created result_checker.py and proved it can catch command drift. Now the standing protocol and both AI prompts must be hardened so Claude generates stricter tasks and Codex refuses undeclared commands.",
+  "allowed_files": [
+    ".ai_agents/docs/AI_COLLAB_PROTOCOL.md",
+    ".ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md",
+    ".ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    ".ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "credentials",
+    "token",
+    "api_key",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "Validate this task with agent_guard.py before doing anything else.",
+    "Read only the three allowed protocol/prompt files.",
+    "Update AI_COLLAB_PROTOCOL.md to add a Command Discipline section.",
+    "The Command Discipline section must state that all shell commands must be declared in task.commands before execution.",
+    "The protocol must state that if AI-B needs an undeclared command, it must stop and request a revised task instead of running the command.",
+    "The protocol must state that result_checker.py must pass before AI-A review or before moving to the next task.",
+    "Update AI_A_RESEARCH_DIRECTOR.md so Claude must include every command AI-B may run, including JSON validation and result_checker commands, when creating future task JSON files.",
+    "Update AI_B_EXECUTION_ENGINEER.md so Codex must refuse undeclared commands and must produce result JSON that stays inside task.allowed_files and task.commands.",
+    "Write result_0004_protocol_hardening.json.",
+    "Run result_checker.py on task_0004/result_0004 after result JSON is written.",
+    "Do not modify source code outside .ai_agents."
+  ],
+  "commands": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0004_protocol_hardening.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0004_protocol_hardening.json",
+    "sed -n '1,240p' .ai_agents/docs/AI_COLLAB_PROTOCOL.md",
+    "sed -n '1,240p' .ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md",
+    "sed -n '1,240p' .ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    "git diff -- .ai_agents/docs/AI_COLLAB_PROTOCOL.md .ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md .ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0004_protocol_hardening.json .ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "expected_outputs": [
+    ".ai_agents/docs/AI_COLLAB_PROTOCOL.md",
+    ".ai_agents/prompts/AI_A_RESEARCH_DIRECTOR.md",
+    ".ai_agents/prompts/AI_B_EXECUTION_ENGINEER.md",
+    ".ai_agents/tasks/results/result_0004_protocol_hardening.json"
+  ],
+  "success_criteria": [
+    "AI_COLLAB_PROTOCOL.md contains a Command Discipline section.",
+    "AI_A_RESEARCH_DIRECTOR.md instructs Claude to declare every shell command in task.commands.",
+    "AI_B_EXECUTION_ENGINEER.md instructs Codex to refuse undeclared commands.",
+    "The protocol says result_checker.py must pass before the next task review.",
+    "result_0004_protocol_hardening.json is created.",
+    "result_checker.py passes for task_0004/result_0004.",
+    "No robot motion script, ROS driver, controller, dataset, checkpoint, rosbag, or secret is accessed.",
+    "No source code outside .ai_agents is modified."
+  ],
+  "stop_conditions": [
+    "Any command attempts to launch a robot, ROS, controller, or motion script.",
+    "Any command attempts to modify source code outside .ai_agents.",
+    "Any command attempts to read secrets, datasets, checkpoints, or rosbags.",
+    "A command requires sudo or installs system packages.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands.",
+    "AI-B needs a shell command not listed in task.commands."
+  ],
+  "max_time_minutes": 30,
+  "requires_human_approval": false
+}

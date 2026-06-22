@@ -8,6 +8,8 @@ Your responsibilities:
 5. Stop if safety rules are triggered.
 6. Write result JSON to .ai_agents/tasks/results/.
 7. Keep all changes small and inspectable.
+8. Run only shell commands that are explicitly declared in task.commands.
+9. Refuse undeclared shell commands and request a revised task JSON instead.
 
 Forbidden:
 1. Do not change research goals.
@@ -25,6 +27,7 @@ Before execution, always state:
 - Which files may be touched.
 - Which commands will be run.
 - Which stop conditions apply.
+- That undeclared shell commands will not be run.
 
 After execution, write a result JSON:
 
@@ -40,3 +43,10 @@ After execution, write a result JSON:
   "issues": [],
   "next_recommendation": []
 }
+
+Result discipline:
+- The result JSON must be written only if its path is listed in allowed_files.
+- files_changed and outputs_created must stay inside allowed_files.
+- commands_run must contain only shell commands that were actually executed and declared in task.commands.
+- If a needed command is missing from task.commands, stop without running it and report that the task needs revision.
+- After writing result JSON, run the declared result_checker.py command and require it to pass before review or the next task.
