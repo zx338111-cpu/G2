@@ -1,0 +1,81 @@
+{
+  "task_id": "task_0002_vla_worldmodel_doc_review",
+  "title": "VLA / world model documentation review",
+  "role": "execution_engineer",
+  "objective": "Read only the four root-level VLA / world model / architecture documents and produce a structured summary of how VLA, world model, robot execution, logging, and evaluation relate in the current project.",
+  "context": "task_0001 showed that VLA/world-model intent currently lives mainly in root planning documents, not in identified source modules. Before designing any model or evaluation task, AI-A needs a static, read-only synthesis of these documents so that data flow, model flow, evaluation metrics, and a concrete engineering-ready next step (task_0003) can be defined. This task must remain documentation-only: no source code changes, no robot motion, no ROS/driver/controller launch, and no secret/dataset/checkpoint/rosbag access.",
+  "risk_level": "low",
+  "allowed_files": [
+    ".ai_agents/review/vla_worldmodel_doc_review.md",
+    ".ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "credentials",
+    "token",
+    "api_key",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "Validate this task with .ai_agents/scripts/agent_guard.py before doing anything else.",
+    "Read only these four root documents using static read commands: G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md, G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md, G2_WEEKLY_REPORT_20260618.md, G2_WEEKLY_REPORT_BRIEF_20260618.md.",
+    "Do not open, read, or execute any other file; do not run any robot, ROS, driver, controller, or motion script; do not read secrets, datasets, checkpoints, or rosbags.",
+    "From the documents, summarize the current VLA / world model objective in plain language.",
+    "Extract the data flow and name the concrete signals: camera, logs, state, action, task.",
+    "Extract the model flow and name the components: VLA, world model, critic, memory, planner, controller.",
+    "Extract candidate evaluation metrics that could realistically be measured from existing logs/artifacts.",
+    "Propose the single most engineering-ready next task (task_0003) with a one-line rationale, keeping it low-risk and documentation/analysis-only.",
+    "Write the synthesis to .ai_agents/review/vla_worldmodel_doc_review.md.",
+    "Write the final result JSON to .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json.",
+    "Do not modify any source code."
+  ],
+  "commands": [
+    "cat G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md",
+    "cat G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "cat G2_WEEKLY_REPORT_20260618.md",
+    "cat G2_WEEKLY_REPORT_BRIEF_20260618.md",
+    "grep -niE \"camera|logs?|state|action|task\" G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "grep -niE \"vla|world model|critic|memory|planner|controller\" G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "grep -niE \"metric|eval|success|accuracy|latency|failure|retry\" G2_WEEKLY_REPORT_20260618.md G2_WEEKLY_REPORT_BRIEF_20260618.md"
+  ],
+  "expected_outputs": [
+    ".ai_agents/review/vla_worldmodel_doc_review.md",
+    ".ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "success_criteria": [
+    "Only the two declared output files are created; no source code is modified.",
+    "No robot motion script, ROS driver, or controller is executed.",
+    "The review summarizes the current VLA / world model objective.",
+    "The review extracts the data flow: camera/logs/state/action/task.",
+    "The review extracts the model flow: VLA/world model/critic/memory/planner/controller.",
+    "The review extracts candidate evaluation metrics that can realistically be measured.",
+    "The review proposes the next most engineering-ready task_0003 with a short rationale."
+  ],
+  "stop_conditions": [
+    "Any command attempts to launch a robot, ROS, controller, or motion script.",
+    "Any command attempts to modify source code.",
+    "Any command attempts to read secrets, datasets, checkpoints, or rosbags.",
+    "A command requires sudo or installs system packages.",
+    "A command attempts to read any file other than the four listed root documents.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands."
+  ],
+  "max_time_minutes": 30,
+  "requires_human_approval": false
+}

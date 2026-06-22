@@ -1,0 +1,41 @@
+{
+  "task_id": "task_0002_vla_worldmodel_doc_review",
+  "status": "done",
+  "summary": "Reviewed the four allowed root-level VLA/world-model/architecture documents and produced a structured synthesis covering current objective, data flow, model flow, measurable evaluation metrics, gaps, and a low-risk documentation-only task_0003 recommendation.",
+  "files_changed": [
+    ".ai_agents/review/vla_worldmodel_doc_review.md",
+    ".ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json",
+    "cat G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md",
+    "cat G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "cat G2_WEEKLY_REPORT_20260618.md",
+    "cat G2_WEEKLY_REPORT_BRIEF_20260618.md",
+    "grep -niE \"camera|logs?|state|action|task\" G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "grep -niE \"vla|world model|critic|memory|planner|controller\" G2_GDK_SECONDARY_DEVELOPMENT_VLA_WORLDMODEL_GUIDE.md G2_LIVE_ARCHITECTURE_DEEP_DIVE_20260618.md",
+    "grep -niE \"metric|eval|success|accuracy|latency|failure|retry\" G2_WEEKLY_REPORT_20260618.md G2_WEEKLY_REPORT_BRIEF_20260618.md"
+  ],
+  "outputs_created": [
+    ".ai_agents/review/vla_worldmodel_doc_review.md",
+    ".ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0002_vla_worldmodel_doc_review passed guard checks",
+    "Read the four task-listed root documents with static cat commands",
+    "Extracted data-flow and model-flow matches with task-listed grep commands",
+    "The weekly-report evaluation grep returned no matching lines"
+  ],
+  "issues": [
+    "The documents contain an action-contract mismatch: the guide recommends a 16D state / 14D dual-arm action contract, while the weekly report says the current practical VLA path is closer to an 8D left-arm absolute action interface.",
+    "A concrete critic implementation is not defined in the reviewed documents; the review treats critic work as an offline/dry-run evaluation role for now.",
+    "The third grep command returned no matches for the specified evaluation keywords in the two weekly report documents."
+  ],
+  "next_recommendation": [
+    "Create task_0003_vla_contract_and_metric_schema as a documentation-only task to reconcile the 8D and 14D contracts and map existing logs/artifacts to measurable VLA dry-run metrics before any source, dataset, checkpoint, or robot execution work."
+  ]
+}
