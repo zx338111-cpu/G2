@@ -1,0 +1,39 @@
+{
+  "task_id": "task_0001_project_inventory",
+  "status": "done",
+  "summary": "Created a safe static project inventory from top-level files, depth-2 directories, and file-name-only classification. No source code was modified and no robot motion, ROS driver, dataset, checkpoint, rosbag, or secret access was performed.",
+  "files_changed": [
+    ".ai_agents/logs/root_files.txt",
+    ".ai_agents/logs/dirs_depth2.txt",
+    ".ai_agents/review/project_inventory.md",
+    ".ai_agents/tasks/results/result_0001_project_inventory.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0001_project_inventory.json",
+    "find . -maxdepth 1 -type f | sort > .ai_agents/logs/root_files.txt",
+    "find . -maxdepth 2 \\( -path './.git' -o -path './datasets' -o -path './dataset' -o -path './checkpoints' -o -path './rosbags' \\) -prune -o -type d -print | sort > .ai_agents/logs/dirs_depth2.txt",
+    "find . -maxdepth 3 \\( -path './.git' -o -path './datasets' -o -path './dataset' -o -path './checkpoints' -o -path './rosbags' -o -path './.ssh' -o -name '.env' -o -name 'id_rsa' -o -name 'id_ed25519' \\) -prune -o -type f -print | sort"
+  ],
+  "outputs_created": [
+    ".ai_agents/logs/root_files.txt",
+    ".ai_agents/logs/dirs_depth2.txt",
+    ".ai_agents/review/project_inventory.md",
+    ".ai_agents/tasks/results/result_0001_project_inventory.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0001_project_inventory passed guard checks",
+    "Root file inventory created at .ai_agents/logs/root_files.txt",
+    "Depth-2 directory inventory created at .ai_agents/logs/dirs_depth2.txt"
+  ],
+  "issues": [
+    "Several robot motion/manipulation entrypoints are present and should remain blocked from automatic execution without a separate approved safety preflight.",
+    "VLA/world-model implementation code was not identified in the safe shallow inventory; current signals are mainly planning and architecture documents."
+  ],
+  "next_recommendation": [
+    "Have AI-A review .ai_agents/review/project_inventory.md and create narrow follow-up tasks for doc review, primitive interface mapping, or log schema analysis.",
+    "Keep any live robot, ROS driver, calibration, dataset, or checkpoint inspection behind explicit task approval and safety guard checks."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "task_id": "task_0001_project_inventory",
+  "title": "Project inventory",
+  "role": "execution_engineer",
+  "risk_level": "low",
+  "objective": "Inspect the repository structure and create a concise project inventory for VLA/world model workflow planning.",
+  "context": "Before creating VLA/world model tasks, AI-A needs a safe project inventory. This task must not modify source code or launch robot scripts.",
+  "allowed_files": [
+    ".ai_agents/logs/root_files.txt",
+    ".ai_agents/logs/dirs_depth2.txt",
+    ".ai_agents/review/project_inventory.md",
+    ".ai_agents/tasks/results/result_0001_project_inventory.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "List top-level files.",
+    "List directories up to depth 2 while pruning .git, datasets, dataset, checkpoints, and rosbags.",
+    "Identify likely robot, VLA, world model, ROS, viewer, tool, log, and script components from filenames and safe directory names.",
+    "Write findings to .ai_agents/review/project_inventory.md.",
+    "Write final result JSON to .ai_agents/tasks/results/result_0001_project_inventory.json.",
+    "Do not modify source code."
+  ],
+  "commands": [
+    "find . -maxdepth 1 -type f | sort > .ai_agents/logs/root_files.txt",
+    "find . -maxdepth 2 \\( -path './.git' -o -path './datasets' -o -path './dataset' -o -path './checkpoints' -o -path './rosbags' \\) -prune -o -type d -print | sort > .ai_agents/logs/dirs_depth2.txt"
+  ],
+  "expected_outputs": [
+    ".ai_agents/logs/root_files.txt",
+    ".ai_agents/logs/dirs_depth2.txt",
+    ".ai_agents/review/project_inventory.md",
+    ".ai_agents/tasks/results/result_0001_project_inventory.json"
+  ],
+  "success_criteria": [
+    "No source files are modified.",
+    "Project inventory is created.",
+    "Major robot/VLA/world model related files are identified.",
+    "Unknowns and next inspection targets are listed.",
+    "No robot motion script is executed."
+  ],
+  "stop_conditions": [
+    "A command requires sudo.",
+    "A command attempts to read secrets.",
+    "A command attempts to launch robot motion.",
+    "A command attempts to modify source code.",
+    "A command attempts to access datasets, checkpoints, or rosbags.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands."
+  ],
+  "max_time_minutes": 20,
+  "requires_human_approval": false
+}
