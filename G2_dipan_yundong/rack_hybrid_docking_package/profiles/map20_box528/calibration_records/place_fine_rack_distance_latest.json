@@ -1,0 +1,59 @@
+{
+  "schema": "g2_place_fine_rack_distance_v1",
+  "label": "place_fine_rack_distance",
+  "source_record": "rack_hybrid_docking_package/calibration_records/rod02_grab_calibration_20260615_184829.json",
+  "captured_at_record": "20260615_184829",
+  "updated_at": 1781520511.656747,
+  "readiness_ok": true,
+  "readiness_problems": [],
+  "current_pose": {
+    "position": {
+      "x": -2.318135,
+      "y": 0.600138,
+      "z": 0.021358
+    },
+    "orientation": {
+      "x": -0.010908,
+      "y": -0.003875,
+      "z": -0.999148,
+      "w": -0.039608
+    }
+  },
+  "front_ultrasonic_summary_mm": {
+    "valid_samples": 20,
+    "min_mm": 305,
+    "max_mm": 308,
+    "median_mm": 308.0,
+    "last_mm": 308
+  },
+  "front_ultrasonic_samples_mm": [
+    308,
+    305,
+    305,
+    305,
+    305,
+    305,
+    305,
+    305,
+    305,
+    305,
+    308,
+    308,
+    308,
+    308,
+    308,
+    308,
+    308,
+    308,
+    308,
+    308
+  ],
+  "distance_mm": {
+    "median": 308,
+    "min": 305,
+    "max": 308,
+    "last": 308,
+    "sample_count": 20
+  },
+  "note": "Current measured chassis-to-rack distance at place fine position; read-only ultrasonic measurement, no motion sent."
+}

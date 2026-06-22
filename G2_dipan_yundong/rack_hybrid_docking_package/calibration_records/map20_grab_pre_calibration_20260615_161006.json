@@ -1,0 +1,68 @@
+{
+  "schema": "g2_station_calibration_v1",
+  "timestamp_local": "20260615_161006",
+  "station": "GRAB_PRE",
+  "mode": "full",
+  "map_id_expected": 20,
+  "map_id_current": 20,
+  "config": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/rack_hybrid_docking_package/industrial_station_config.json",
+  "backup_path": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/rack_hybrid_docking_package/industrial_station_config.json.bak_GRAB_PRE_20260615_161006",
+  "record_path": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/rack_hybrid_docking_package/calibration_records/map20_grab_pre_calibration_20260615_161006.json",
+  "note": "manual recapture of adjusted grab target position and yaw on map20",
+  "no_motion_commands_sent": true,
+  "stability": {
+    "samples": 8,
+    "xy_span_m": 0.0033708375813734604,
+    "yaw_span_deg": 0.0347382364317923,
+    "x_median": -0.508003,
+    "y_median": -0.45358750000000003,
+    "yaw_first_deg": -95.46714747575729,
+    "yaw_last_deg": -95.48512101672354
+  },
+  "old_station": {
+    "position": {
+      "x": -0.509411,
+      "y": -0.462601,
+      "z": 0.003599
+    },
+    "orientation": {
+      "x": -0.003992,
+      "y": -0.004938,
+      "z": -0.716097,
+      "w": 0.697972
+    }
+  },
+  "captured_pose": {
+    "position": {
+      "x": -0.50646,
+      "y": -0.453427,
+      "z": 0.003364
+    },
+    "orientation": {
+      "x": -0.004095,
+      "y": -0.005037,
+      "z": -0.740111,
+      "w": 0.672453
+    }
+  },
+  "new_station": {
+    "position": {
+      "x": -0.50646,
+      "y": -0.453427,
+      "z": 0.003364
+    },
+    "orientation": {
+      "x": -0.004095,
+      "y": -0.005037,
+      "z": -0.740111,
+      "w": 0.672453
+    }
+  },
+  "delta": {
+    "xy_from_old_to_captured_m": 0.00963694334319751,
+    "old_yaw_deg": -91.46926087600178,
+    "captured_yaw_deg": -95.48512101672354,
+    "new_yaw_deg": -95.48512101672354,
+    "yaw_delta_old_to_new_deg": -4.015860140721756
+  }
+}

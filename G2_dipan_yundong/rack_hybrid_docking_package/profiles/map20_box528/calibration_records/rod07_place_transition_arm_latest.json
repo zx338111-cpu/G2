@@ -1,0 +1,31 @@
+{
+  "idx01_body_joint1": -0.08624662865814442,
+  "idx02_body_joint2": 0.17905136837442548,
+  "idx03_body_joint3": -0.17332898452536108,
+  "idx04_body_joint4": -0.001054445020905179,
+  "idx05_body_joint5": 0.0,
+  "idx11_head_joint1": 0.0,
+  "idx12_head_joint2": 0.0,
+  "idx13_head_joint3": 0.0018213141270180366,
+  "idx21_arm_l_joint1": 1.532686391727322,
+  "idx22_arm_l_joint2": -1.5714042266032209,
+  "idx23_arm_l_joint3": -1.5698828891726102,
+  "idx24_arm_l_joint4": -2.1165972372425244,
+  "idx25_arm_l_joint5": 0.0006960437825031096,
+  "idx26_arm_l_joint6": 0.5245088975850279,
+  "idx27_arm_l_joint7": 0.0007469767383508751,
+  "idx61_arm_r_joint1": -1.5357009236337233,
+  "idx62_arm_r_joint2": -1.5705720719863552,
+  "idx63_arm_r_joint3": 1.5718698736619183,
+  "idx64_arm_r_joint4": -2.116303024521098,
+  "idx65_arm_r_joint5": 0.0006882540363146279,
+  "idx66_arm_r_joint6": 0.5216596481137795,
+  "idx67_arm_r_joint7": 0.0004939897505987979,
+  "_metadata": {
+    "label": "place_transition_future",
+    "source_record": "rack_hybrid_docking_package/calibration_records/rod02_grab_calibration_20260615_183118.json",
+    "source_pose_json": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/rack_hybrid_docking_package/calibration_records/rod02_grab_pose_20260615_183118.json",
+    "note": "Future place transition pose. Captured after place above, +0.08m forward, then -0.10m down total.",
+    "updated_at": 1781519479.9050236
+  }
+}

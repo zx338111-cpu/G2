@@ -1,0 +1,52 @@
+{
+  "label": "GRAB_PRE",
+  "map_id": 20,
+  "source": "calibrate_station_from_current_pose",
+  "captured_at": "20260615_161006",
+  "mode": "full",
+  "pose": {
+    "position": {
+      "x": -0.50646,
+      "y": -0.453427,
+      "z": 0.003364
+    },
+    "orientation": {
+      "x": -0.004095,
+      "y": -0.005037,
+      "z": -0.740111,
+      "w": 0.672453
+    },
+    "yaw_deg": -95.48512101672354
+  },
+  "captured_pose": {
+    "position": {
+      "x": -0.50646,
+      "y": -0.453427,
+      "z": 0.003364
+    },
+    "orientation": {
+      "x": -0.004095,
+      "y": -0.005037,
+      "z": -0.740111,
+      "w": 0.672453
+    },
+    "yaw_deg": -95.48512101672354
+  },
+  "delta": {
+    "xy_from_old_to_captured_m": 0.00963694334319751,
+    "old_yaw_deg": -91.46926087600178,
+    "captured_yaw_deg": -95.48512101672354,
+    "new_yaw_deg": -95.48512101672354,
+    "yaw_delta_old_to_new_deg": -4.015860140721756
+  },
+  "stability": {
+    "samples": 8,
+    "xy_span_m": 0.0033708375813734604,
+    "yaw_span_deg": 0.0347382364317923,
+    "x_median": -0.508003,
+    "y_median": -0.45358750000000003,
+    "yaw_first_deg": -95.46714747575729,
+    "yaw_last_deg": -95.48512101672354
+  },
+  "notes": "manual recapture of adjusted grab target position and yaw on map20"
+}

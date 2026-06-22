@@ -1,0 +1,14 @@
+[Unit]
+Description=G2 arm EtherCAT boot recovery guard (no motion)
+Wants=genie_app.service
+After=genie_app.service share_phc2sys.service share_ptp4l_domain2.service
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+TimeoutStartSec=240
+ExecStart=/usr/local/sbin/g2_arm_ethercat_boot_recover.sh
+
+[Install]
+WantedBy=multi-user.target

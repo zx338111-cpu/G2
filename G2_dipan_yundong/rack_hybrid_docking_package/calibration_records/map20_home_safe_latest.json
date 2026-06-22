@@ -1,0 +1,29 @@
+{
+  "label": "HOME_SAFE",
+  "map_id": 20,
+  "source": "manual_navigation_then_readiness_current_pose",
+  "captured_at": "2026-06-15 14:58 +0800",
+  "pose": {
+    "position": {
+      "x": -0.849683,
+      "y": 0.242847,
+      "z": 0.002202
+    },
+    "orientation": {
+      "x": -0.004234,
+      "y": -0.004674,
+      "z": -0.715761,
+      "w": 0.698317
+    },
+    "yaw_deg": -91.413817
+  },
+  "sensor_check": {
+    "front_ultrasonic_min_mm_range": [
+      1204,
+      1563
+    ],
+    "readiness_ok": true,
+    "odom_stopped": true
+  },
+  "notes": "Manual HOME_SAFE captured after the user navigated to the real home point on map20. This replaces the earlier incorrect HOME_SAFE pose near the grab target."
+}

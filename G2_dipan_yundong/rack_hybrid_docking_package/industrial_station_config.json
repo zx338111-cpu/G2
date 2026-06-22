@@ -1,0 +1,70 @@
+{
+  "map_id": 20,
+  "stations": {
+    "HOME_SAFE": {
+      "position": {
+        "x": -0.849683,
+        "y": 0.242847,
+        "z": 0.002202
+      },
+      "orientation": {
+        "x": -0.004234,
+        "y": -0.004674,
+        "z": -0.715761,
+        "w": 0.698317
+      }
+    },
+    "GRAB_PRE": {
+      "position": {
+        "x": -0.50646,
+        "y": -0.453427,
+        "z": 0.003364
+      },
+      "orientation": {
+        "x": -0.004095,
+        "y": -0.005037,
+        "z": -0.740111,
+        "w": 0.672453
+      }
+    },
+    "PLACE_PRE": {
+      "position": {
+        "x": -1.964203,
+        "y": 0.555668,
+        "z": 0.016897
+      },
+      "orientation": {
+        "x": -0.012198,
+        "y": -0.006317,
+        "z": -0.99911,
+        "w": -0.03989
+      }
+    },
+    "RECOVERY_SAFE": {
+      "position": {
+        "x": -1.232694,
+        "y": 1.796803,
+        "z": 0.0
+      },
+      "orientation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -0.732864,
+        "w": 0.680375
+      }
+    }
+  },
+  "arrival": {
+    "xy_tolerance_m": 0.08,
+    "yaw_tolerance_deg": 3.0,
+    "timeout_s": 60.0,
+    "poll_interval_s": 0.5,
+    "stopped_speed_mps": 0.02
+  },
+  "safety": {
+    "require_charge_plug_unplugged": true,
+    "max_charge_input_current_a": 0.5,
+    "require_motion_control_error_zero": true,
+    "require_pnc_idle_before_navigation": true
+  }
+}

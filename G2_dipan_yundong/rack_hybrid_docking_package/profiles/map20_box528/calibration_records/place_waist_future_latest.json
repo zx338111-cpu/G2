@@ -1,0 +1,14 @@
+{
+  "idx01_body_joint1": -0.08624662865814442,
+  "idx02_body_joint2": 0.17905136837442548,
+  "idx03_body_joint3": -0.17332898452536108,
+  "idx04_body_joint4": -0.001054445020905179,
+  "idx05_body_joint5": 0.0,
+  "_metadata": {
+    "label": "place_waist_future_baseline",
+    "source_record": "rack_hybrid_docking_package/calibration_records/rod02_grab_calibration_20260615_182405.json",
+    "source_pose_json": "rack_hybrid_docking_package/calibration_records/rod02_grab_pose_20260615_182405.json",
+    "note": "Use this saved waist/body pose for future place operations; captured before arm raise +0.35m.",
+    "updated_at": 1781519075.5170774
+  }
+}

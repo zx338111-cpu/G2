@@ -1,0 +1,98 @@
+{
+  "schema": "g2_industrial_cell_site_profile_v1",
+  "site_name": "map20_box528",
+  "description": "Validated map20 BOX_528 seven-rods industrial-cell profile.",
+  "map_id": 20,
+  "robot": {
+    "host": "agi@192.168.0.7",
+    "remote_dir": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1"
+  },
+  "station_config": "industrial_station_config.json",
+  "rod_count": 7,
+  "grab_poses": {
+    "1": "calibration_records/rod01_grab_pose_latest.json",
+    "2": "calibration_records/rod02_grab_pose_latest.json",
+    "3": "calibration_records/rod03_grab_pose_latest.json",
+    "4": "calibration_records/rod04_grab_pose_latest.json",
+    "5": "calibration_records/rod05_grab_pose_latest.json",
+    "6": "calibration_records/rod06_grab_pose_latest.json",
+    "7": "calibration_records/rod07_grab_pose_latest.json"
+  },
+  "place_sequence": {
+    "waist": "calibration_records/rod07_place_waist_adjusted_latest.json",
+    "above_arm": "calibration_records/rod07_place_above_arm_latest.json",
+    "transition_arm": "calibration_records/rod07_place_transition_arm_latest.json",
+    "transition2_arm": "calibration_records/rod07_place_transition2_arm_latest.json",
+    "final_arm_reference": "calibration_records/rod07_place_final_arm_latest.json",
+    "final_arm_up050_reference": "calibration_records/rod07_place_final_arm_up050_latest.json"
+  },
+  "field_records": {
+    "place_waist_future": "calibration_records/place_waist_future_latest.json",
+    "place_above_future": "calibration_records/place_above_future_latest.json",
+    "place_transition_future": "calibration_records/place_transition_future_latest.json",
+    "place_transition2_future": "calibration_records/place_transition2_future_latest.json",
+    "place_final_future": "calibration_records/place_final_future_latest.json",
+    "place_fine_rack_distance": "calibration_records/place_fine_rack_distance_latest.json",
+    "fine_position_brake_compensation": "calibration_records/fine_position_brake_compensation_latest.json"
+  },
+  "tuned": {
+    "arm_joint_speed_radps": 0.12,
+    "fast_safe_arm_joint_speed_radps": 0.20,
+    "waist_joint_speed_radps": 0.75,
+    "arm_settle_s": 0.80,
+    "waist_settle_s": 0.40,
+    "offset_settle_s": 0.30,
+    "offset_max_abs_m": 0.25,
+    "grab_final_stop_mm": 328,
+    "grab_final_brake_margin_mm": 20,
+    "grab_final_speed_mps": 0.08,
+    "place_final_stop_mm": 308,
+    "place_final_brake_margin_mm": 20,
+    "place_final_speed_mps": 0.15,
+    "pick_down_z_m": 0.0,
+    "pick_back_x_m": -0.20,
+    "pick_back_down_x_m": -0.085,
+    "place_final_before_open_x_m": 0.03,
+    "place_final_before_open_z_m": -0.025,
+    "place_raise_before_open_z_m": 0.0,
+    "place_pull_x_m": -0.25,
+    "place_pull_back_down_x_m": -0.02,
+    "place_pull_back_down_z_m": -0.01,
+    "place_pull_drop_after_x_m": -0.06,
+    "place_pull_drop_z_m": -0.07,
+    "local_retreat_m": 0.45,
+    "local_retreat_speed_mps": 0.20,
+    "fine_position_max_duration_s": 60.0,
+    "refine_yaw_tolerance_deg": 1.5,
+    "refine_yaw_max_error_deg": 10.0,
+    "refine_yaw_angular_speed_radps": 0.05,
+    "refine_yaw_fine_angular_speed_radps": 0.02,
+    "refine_yaw_timeout_s": 12.0,
+    "refine_yaw_stations": [
+      "GRAB_PRE",
+      "PLACE_PRE",
+      "RECOVERY_SAFE",
+      "HOME_SAFE"
+    ]
+  },
+  "runner": {
+    "script": "rack_hybrid_docking_package/industrial_cell_7_rods_single_debug.py",
+    "validated_command": "python3 rack_hybrid_docking_package/run_site_7_rods_live.py --profile rack_hybrid_docking_package/profiles/map20_box528/profile.json --start-index 1 --end-index 7",
+    "last_verified_final_state": {
+      "rod_index": 7,
+      "end_index": 7,
+      "phase": "MISSION_DONE",
+      "current_station": "HOME_SAFE",
+      "holding_rod": false
+    },
+    "evidence_logs": {
+      "full_run_log": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/logs/single_debug_map20_20260617_102005.log",
+      "full_run_checkpoint": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/logs/single_debug_map20_20260617_102005_checkpoint.json",
+      "full_run_analysis": "/data/g2_industrial_cell_20260612/wxf/BOX_528_1/logs/single_debug_map20_20260617_102005_analysis.txt"
+    }
+  },
+  "handoff_docs": [
+    "rack_hybrid_docking_package/20260616_map20_class_import_architecture_and_full_run_handoff.md",
+    "rack_hybrid_docking_package/NEW_SITE_REPLICATION_GUIDE.md"
+  ]
+}

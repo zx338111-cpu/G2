@@ -1,0 +1,31 @@
+{
+  "idx01_body_joint1": -0.08634248729640853,
+  "idx02_body_joint2": 0.1793389442892177,
+  "idx03_body_joint3": -0.1734248431636252,
+  "idx04_body_joint4": 0.0,
+  "idx05_body_joint5": 0.0,
+  "idx11_head_joint1": 0.0,
+  "idx12_head_joint2": 0.0,
+  "idx13_head_joint3": 0.0018213141270180366,
+  "idx21_arm_l_joint1": 2.0078818316840237,
+  "idx22_arm_l_joint2": -1.5711690861237235,
+  "idx23_arm_l_joint3": -1.5686572624915394,
+  "idx24_arm_l_joint4": -2.4473524969349394,
+  "idx25_arm_l_joint5": 0.0034277280074300866,
+  "idx26_arm_l_joint6": 0.44273441910107836,
+  "idx27_arm_l_joint7": 0.0005075319247418508,
+  "idx61_arm_r_joint1": -2.008835176775245,
+  "idx62_arm_r_joint2": -1.5707861402037269,
+  "idx63_arm_r_joint3": 1.5730112512419046,
+  "idx64_arm_r_joint4": -2.443979297150829,
+  "idx65_arm_r_joint5": 0.003539540825797064,
+  "idx66_arm_r_joint6": 0.44061644703355474,
+  "idx67_arm_r_joint7": 0.00029541114391703945,
+  "_metadata": {
+    "schema": "g2_place_above_lowered_v2",
+    "source_capture": "rack_hybrid_docking_package/calibration_records/rod03_grab_pose_20260615_191016.json",
+    "updated_at": "2026-06-15T19:10:38+0800",
+    "note": "Lower place-above point captured after lifting current held rod pose +0.25m total (+0.15m then +0.10m); replaces out-of-range +0.35m point.",
+    "physical_context": "rod3 held at PLACE_PRE, waist already at place waist"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "label": "PLACE_PRE",
+  "map_id": 20,
+  "source": "manual_navigation_then_slam_get_curr_pose",
+  "captured_at": "2026-06-15 14:47 +0800",
+  "pose": {
+    "position": {
+      "x": -1.964203,
+      "y": 0.555668,
+      "z": 0.016897
+    },
+    "orientation": {
+      "x": -0.012198,
+      "y": -0.006317,
+      "z": -0.99911,
+      "w": -0.03989
+    },
+    "yaw_deg": 175.420558
+  },
+  "sensor_check": {
+    "front_ultrasonic_min_mm_range": [
+      677,
+      680
+    ],
+    "readiness_ok": true,
+    "odom_stopped": true
+  },
+  "notes": "Manual place target captured from the robot's current SLAM pose on map20. It is about 1.5 cm from the prior PLACE_PRE guide point pose."
+}

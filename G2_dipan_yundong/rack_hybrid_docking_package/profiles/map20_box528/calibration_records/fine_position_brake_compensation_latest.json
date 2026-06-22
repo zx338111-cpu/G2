@@ -1,0 +1,26 @@
+{
+  "schema": "g2_fine_position_brake_compensation_v1",
+  "updated_at": "2026-06-15T19:01:16+0800",
+  "map_id": 20,
+  "business_final_stop_mm": {
+    "grab": 308,
+    "place": 308
+  },
+  "brake_margin_mm": {
+    "grab": 20,
+    "place": 20
+  },
+  "fine_position_trigger_mm": {
+    "grab": 328,
+    "place": 328
+  },
+  "source_distance_file": "rack_hybrid_docking_package/calibration_records/place_fine_rack_distance_latest.json",
+  "source_distance_mm": {
+    "median": 308,
+    "min": 305,
+    "max": 308,
+    "last": 308,
+    "sample_count": 20
+  },
+  "note": "User observed both grab and place fine positioning coast/brake forward about 20mm; keep final rack distance at 308mm and trigger stop 20mm earlier."
+}

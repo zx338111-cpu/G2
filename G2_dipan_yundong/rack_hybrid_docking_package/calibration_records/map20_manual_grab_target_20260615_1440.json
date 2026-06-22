@@ -1,0 +1,28 @@
+{
+  "label": "map20_manual_grab_target",
+  "map_id": 20,
+  "source": "manual_navigation_then_slam_get_curr_pose",
+  "captured_at": "2026-06-15 14:40 +0800",
+  "pose": {
+    "position": {
+      "x": -0.509895,
+      "y": -0.46266,
+      "z": 0.003982
+    },
+    "orientation": {
+      "x": -0.004094,
+      "y": -0.004738,
+      "z": -0.716059,
+      "w": 0.698011
+    }
+  },
+  "sensor_check": {
+    "front_ultrasonic_min_mm": 863,
+    "front_ultrasonic_stable_range_mm": [
+      863,
+      866
+    ],
+    "odom_stopped": true
+  },
+  "notes": "User manually navigated to the real grab target point on map20. This point is close to map20 guide point 1, so guide point numeric order must not be reused as the old station mapping."
+}
