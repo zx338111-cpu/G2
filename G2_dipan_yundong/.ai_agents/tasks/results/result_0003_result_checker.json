@@ -1,0 +1,39 @@
+{
+  "task_id": "task_0003_result_checker",
+  "status": "done",
+  "summary": "Created a strict result checker and confirmed it fails task_0002/result_0002 because result_0002 recorded an extra command that was not declared in task_0002.commands. This expected failure is the success evidence for task_0003.",
+  "files_changed": [
+    ".ai_agents/scripts/result_checker.py",
+    ".ai_agents/tasks/results/result_0003_result_checker.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0003_result_checker.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0003_result_checker.json",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/scripts/result_checker.py",
+    ".ai_agents/tasks/results/result_0003_result_checker.json"
+  ],
+  "tests_run": [
+    {
+      "command": "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json",
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "passed": true,
+      "stdout": "FAIL: result validation failed\n- commands_run[1] not declared in task.commands and not the matching agent_guard.py command: python3 -m json.tool .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json"
+    }
+  ],
+  "key_logs": [
+    "[OK] task_0003_result_checker passed guard checks",
+    "FAIL: result validation failed",
+    "- commands_run[1] not declared in task.commands and not the matching agent_guard.py command: python3 -m json.tool .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json"
+  ],
+  "issues": [
+    "task_0002/result_0002 contains a recorded command that was not declared in task_0002.commands: python3 -m json.tool .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json",
+    "task_0002 and result_0002 were not modified."
+  ],
+  "next_recommendation": [
+    "Use result_checker.py after future AI-B tasks to catch undeclared commands, file outputs outside allowed_files, and invalid result statuses before review."
+  ]
+}
