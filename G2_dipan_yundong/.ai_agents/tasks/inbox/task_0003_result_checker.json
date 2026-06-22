@@ -48,6 +48,7 @@
   ],
   "commands": [
     "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0003_result_checker.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0003_result_checker.json",
     "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0002_vla_worldmodel_doc_review.json .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
   ],
   "expected_outputs": [
