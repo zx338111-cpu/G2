@@ -1,0 +1,45 @@
+{
+  "task_id": "task_0008_real_log_candidate_inventory",
+  "status": "done",
+  "summary": "Created a safe inventory of real log/report artifact candidates for future VLA dry-run JSONL conversion using only the declared candidate listing command and declared read-only schema/report files.",
+  "files_changed": [
+    ".ai_agents/review/real_log_candidates.txt",
+    ".ai_agents/review/real_log_candidate_inventory.md",
+    ".ai_agents/tasks/results/result_0008_real_log_candidate_inventory.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0008_real_log_candidate_inventory.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0008_real_log_candidate_inventory.json",
+    "find logs rack_hybrid_docking_package/logs -maxdepth 3 -type f \\( -name '*.log' -o -name '*.json' -o -name '*.jsonl' -o -name '*.md' -o -name '*.txt' \\) -size -2M | sort | head -200 > .ai_agents/review/real_log_candidates.txt",
+    "sed -n '1,260p' .ai_agents/review/vla_contract_and_metric_schema.md",
+    "sed -n '1,220p' .ai_agents/review/vla_dryrun_validation_report.md",
+    "sed -n '1,220p' .ai_agents/review/vla_dryrun_negative_validation_report.md",
+    "sed -n '1,220p' .ai_agents/review/real_log_candidates.txt",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0008_real_log_candidate_inventory.json .ai_agents/tasks/results/result_0008_real_log_candidate_inventory.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/review/real_log_candidates.txt",
+    ".ai_agents/review/real_log_candidate_inventory.md",
+    ".ai_agents/tasks/results/result_0008_real_log_candidate_inventory.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed",
+    "result_checker.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0008_real_log_candidate_inventory passed guard checks",
+    "Generated .ai_agents/review/real_log_candidates.txt from declared logs directories only",
+    "Read the VLA contract, positive validation report, negative validation report, and generated candidate list with declared sed commands",
+    "Inventory classifies candidate groups as high, medium, low, or unknown",
+    "Recommended task_0009_convert_one_dryrun_bundle_to_vla_jsonl",
+    "OK: result stays within declared commands, allowed files, and status set"
+  ],
+  "issues": [
+    "Candidate log/report bodies were not inspected because no task command was declared for reading individual candidate files.",
+    "Signal availability is conservative and filename/schema based until a follow-up task explicitly reads one selected small bundle.",
+    "Media-state candidates were not strongly represented in the generated candidate list."
+  ],
+  "next_recommendation": [
+    "Create task_0009_convert_one_dryrun_bundle_to_vla_jsonl to read one selected high-value dry-run bundle, convert a capped sample to VLA dry-run JSONL, and validate it with the existing static validator."
+  ]
+}
