@@ -1,0 +1,40 @@
+{
+  "task_id": "task_0005_vla_contract_and_metric_schema",
+  "status": "done",
+  "summary": "Created a documentation-only VLA contract and metric schema that defines observation, state, task, safety, world-model, critic, action, dry-run metric, and JSONL event fields while reconciling the current 8D left-arm absolute action path with the guide-level 14D dual-arm delta action contract.",
+  "files_changed": [
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json",
+    "sed -n '1,260p' .ai_agents/review/project_inventory.md",
+    "sed -n '1,320p' .ai_agents/review/vla_worldmodel_doc_review.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json .ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed",
+    "result_checker.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0005_vla_contract_and_metric_schema passed guard checks",
+    "Read only the task JSON and declared read-only review/result files",
+    "Created the VLA contract and metric schema under .ai_agents/review",
+    "Created the task result JSON under .ai_agents/tasks/results",
+    "OK: result stays within declared commands, allowed files, and status set"
+  ],
+  "issues": [
+    "The existing documentation identifies a contract mismatch: the practical near-term path is 8D left-arm absolute action, while the guide-level target is 14D dual-arm delta action.",
+    "The critic is still a schema/taxonomy role, not an implementation-ready runtime component.",
+    "Metric definitions are limited to fields that can be measured from existing logs, status snapshots, reports, or future dry-run JSONL artifacts."
+  ],
+  "next_recommendation": [
+    "Create task_0006_vla_dryrun_jsonl_fixture_and_static_validator to produce a small sample JSONL fixture and static validation report for this schema without robot execution, source-code changes, datasets, checkpoints, or rosbags."
+  ]
+}

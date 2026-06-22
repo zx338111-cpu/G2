@@ -1,0 +1,91 @@
+{
+  "task_id": "task_0005_vla_contract_and_metric_schema",
+  "title": "Create VLA contract and metric schema",
+  "role": "execution_engineer",
+  "risk_level": "low",
+  "objective": "Create a documentation-only VLA/world-model contract and metric schema that reconciles the 8D left-arm action interface with the 14D dual-arm target interface and defines measurable dry-run evaluation fields.",
+  "context": "task_0002 found that the project currently has a mismatch between an 8D practical left-arm absolute action path and a 14D guide-level dual-arm delta action contract. Before implementing any VLA, world model, critic, or evaluator code, the project needs a stable schema for observation, state, action, task, safety gate, world-model facts, failure taxonomy, and dry-run metrics.",
+  "allowed_files": [
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "read_only_files": [
+    ".ai_agents/review/project_inventory.md",
+    ".ai_agents/review/vla_worldmodel_doc_review.md",
+    ".ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "credentials",
+    "token",
+    "api_key",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "Validate this task with agent_guard.py before doing anything else.",
+    "Read only the declared read_only_files and this task JSON.",
+    "Create .ai_agents/review/vla_contract_and_metric_schema.md.",
+    "The schema document must define a VLA observation contract, including camera fields, state fields, task prompt fields, timestamps, and missing-data handling.",
+    "The schema document must compare the current 8D left-arm absolute action interface against the guide-level 14D dual-arm delta action interface.",
+    "The schema document must define a safe migration path from 8D dry-run validation to 14D dual-arm validation without live robot execution.",
+    "The schema document must define a world model fact table with robot_state, perception_state, task_state, safety_state, memory_state, and media_state.",
+    "The schema document must define critic/retry failure taxonomy categories: observation_missing, action_invalid, safety_gate_blocked, task_phase_mismatch, stale_plan, contact_or_grasp_uncertain, localization_unavailable, controller_not_ready.",
+    "The schema document must define measurable dry-run metrics using existing logs/artifacts only.",
+    "The schema document must include a minimum viable JSONL event schema for future VLA dry-run logs.",
+    "The schema document must include acceptance criteria for future task_0006.",
+    "Write result_0005_vla_contract_and_metric_schema.json.",
+    "Run the declared result_checker.py command after writing the result JSON.",
+    "Do not modify source code outside .ai_agents."
+  ],
+  "commands": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json",
+    "sed -n '1,260p' .ai_agents/review/project_inventory.md",
+    "sed -n '1,320p' .ai_agents/review/vla_worldmodel_doc_review.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0002_vla_worldmodel_doc_review.json",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0005_vla_contract_and_metric_schema.json .ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "expected_outputs": [
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "success_criteria": [
+    "vla_contract_and_metric_schema.md is created.",
+    "The document defines observation, state, action, task, safety, world-model, critic, and metric schemas.",
+    "The document explicitly reconciles 8D left-arm absolute action and 14D dual-arm delta action.",
+    "The document defines dry-run metrics that do not require live robot execution.",
+    "The document defines a future VLA dry-run JSONL event schema.",
+    "The document recommends a concrete low-risk task_0006.",
+    "result_0005_vla_contract_and_metric_schema.json is created.",
+    "result_checker.py passes for task_0005/result_0005.",
+    "No robot motion script, ROS driver, controller, dataset, checkpoint, rosbag, or secret is accessed.",
+    "No source code outside .ai_agents is modified."
+  ],
+  "stop_conditions": [
+    "Any command attempts to launch a robot, ROS, controller, or motion script.",
+    "Any command attempts to modify source code outside .ai_agents.",
+    "Any command attempts to read secrets, datasets, checkpoints, or rosbags.",
+    "A command requires sudo or installs system packages.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands.",
+    "AI-B needs a shell command not listed in task.commands."
+  ],
+  "max_time_minutes": 40,
+  "requires_human_approval": false
+}
