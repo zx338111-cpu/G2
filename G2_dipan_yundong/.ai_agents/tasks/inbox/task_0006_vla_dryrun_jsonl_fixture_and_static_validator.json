@@ -1,0 +1,94 @@
+{
+  "task_id": "task_0006_vla_dryrun_jsonl_fixture_and_static_validator",
+  "title": "Create VLA dry-run JSONL fixture and static validator",
+  "role": "execution_engineer",
+  "risk_level": "low",
+  "objective": "Create a small VLA dry-run JSONL fixture and a static validator that checks schema shape, action-family consistency, critic taxonomy labels, and produces a validation report.",
+  "context": "task_0005 created the VLA contract and metric schema. The next step is to create a minimal JSONL fixture and a static validator so future VLA/world-model work can be tested without robot execution, model checkpoints, datasets, ROS, or controller startup.",
+  "allowed_files": [
+    ".ai_agents/fixtures/vla_dryrun_sample.jsonl",
+    ".ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    ".ai_agents/review/vla_dryrun_validation_report.md",
+    ".ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "read_only_files": [
+    ".ai_agents/review/vla_contract_and_metric_schema.md",
+    ".ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json"
+  ],
+  "forbidden_files": [
+    ".env",
+    "id_rsa",
+    "id_ed25519",
+    ".ssh/",
+    "credentials",
+    "token",
+    "api_key",
+    "datasets/",
+    "dataset/",
+    "checkpoints/",
+    "rosbags/",
+    "move_arm_by_json_path.py",
+    "move_arm_vertical_stack_grab_above.py",
+    "move_ee_pose_close_2.py",
+    "move_ee_pose_open_2.py",
+    "move_ee_relative_offset.py",
+    "move_waist_by_json_path.py",
+    "offset_move_down.py",
+    "industrial_7_rods_one_click.py",
+    "industrial_cancel_pnc_task.py",
+    "industrial_linear_y_sweep.py",
+    "industrial_turn_diagnostic.py"
+  ],
+  "steps": [
+    "Validate this task with agent_guard.py before doing anything else.",
+    "Read only this task JSON and the declared read_only_files.",
+    "Create .ai_agents/fixtures/vla_dryrun_sample.jsonl with several schema-valid sample events.",
+    "The fixture must include at least one left_abs_8d action event, one dual_delta_14d action event, one observation_missing critic event, and one safety_gate_blocked critic event.",
+    "Create .ai_agents/scripts/validate_vla_dryrun_jsonl.py.",
+    "The validator must read a JSONL file and validate required top-level fields, schema_version, unique event_id, action_family/vector length consistency, safety_gate shape, critic taxonomy labels, and artifact_refs shape.",
+    "The validator must support a --report argument and write a Markdown validation report.",
+    "The validator must exit 0 when the fixture is schema-valid, even if some events intentionally contain critic categories such as observation_missing or safety_gate_blocked.",
+    "Create .ai_agents/review/vla_dryrun_validation_report.md by running the validator on the fixture.",
+    "Create result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json.",
+    "Run the declared result_checker.py command after writing the result JSON.",
+    "Do not modify source code outside .ai_agents."
+  ],
+  "commands": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "mkdir -p .ai_agents/fixtures",
+    "sed -n '1,360p' .ai_agents/review/vla_contract_and_metric_schema.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json",
+    "python3 -m py_compile .ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    "python3 .ai_agents/scripts/validate_vla_dryrun_jsonl.py .ai_agents/fixtures/vla_dryrun_sample.jsonl --report .ai_agents/review/vla_dryrun_validation_report.md",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json .ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "expected_outputs": [
+    ".ai_agents/fixtures/vla_dryrun_sample.jsonl",
+    ".ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    ".ai_agents/review/vla_dryrun_validation_report.md",
+    ".ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "success_criteria": [
+    "vla_dryrun_sample.jsonl is created and contains at least four JSONL events.",
+    "The fixture covers left_abs_8d, dual_delta_14d, observation_missing, and safety_gate_blocked cases.",
+    "validate_vla_dryrun_jsonl.py is created and compiles with py_compile.",
+    "The validator checks required top-level fields, schema_version, unique event_id, action-family/vector length consistency, safety_gate shape, critic taxonomy labels, and artifact_refs shape.",
+    "The validator produces vla_dryrun_validation_report.md.",
+    "The validation report clearly states PASS for schema validation and includes event counts, action-family counts, critic category counts, and any warnings.",
+    "result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json is created.",
+    "result_checker.py passes for task_0006/result_0006.",
+    "No robot motion script, ROS driver, controller, dataset, checkpoint, rosbag, or secret is accessed.",
+    "No source code outside .ai_agents is modified."
+  ],
+  "stop_conditions": [
+    "Any command attempts to launch a robot, ROS, controller, or motion script.",
+    "Any command attempts to modify source code outside .ai_agents.",
+    "Any command attempts to read secrets, datasets, checkpoints, or rosbags.",
+    "A command requires sudo or installs system packages.",
+    "A command attempts to start ROS drivers, hardware controllers, or actuator commands.",
+    "AI-B needs a shell command not listed in task.commands."
+  ],
+  "max_time_minutes": 45,
+  "requires_human_approval": false
+}

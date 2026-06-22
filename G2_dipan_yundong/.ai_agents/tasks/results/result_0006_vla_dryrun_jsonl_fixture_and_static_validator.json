@@ -1,0 +1,47 @@
+{
+  "task_id": "task_0006_vla_dryrun_jsonl_fixture_and_static_validator",
+  "status": "done",
+  "summary": "Created a VLA dry-run JSONL sample fixture, a static JSONL validator, and a generated validation report for schema-only dry-run checks without robot execution.",
+  "files_changed": [
+    ".ai_agents/fixtures/vla_dryrun_sample.jsonl",
+    ".ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    ".ai_agents/review/vla_dryrun_validation_report.md",
+    ".ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "commands_run": [
+    "python3 .ai_agents/scripts/agent_guard.py .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "python3 -m json.tool .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json",
+    "mkdir -p .ai_agents/fixtures",
+    "sed -n '1,360p' .ai_agents/review/vla_contract_and_metric_schema.md",
+    "sed -n '1,220p' .ai_agents/tasks/results/result_0005_vla_contract_and_metric_schema.json",
+    "python3 -m py_compile .ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    "python3 .ai_agents/scripts/validate_vla_dryrun_jsonl.py .ai_agents/fixtures/vla_dryrun_sample.jsonl --report .ai_agents/review/vla_dryrun_validation_report.md",
+    "python3 .ai_agents/scripts/result_checker.py .ai_agents/tasks/inbox/task_0006_vla_dryrun_jsonl_fixture_and_static_validator.json .ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "outputs_created": [
+    ".ai_agents/fixtures/vla_dryrun_sample.jsonl",
+    ".ai_agents/scripts/validate_vla_dryrun_jsonl.py",
+    ".ai_agents/review/vla_dryrun_validation_report.md",
+    ".ai_agents/tasks/results/result_0006_vla_dryrun_jsonl_fixture_and_static_validator.json"
+  ],
+  "tests_run": [
+    "agent_guard.py passed",
+    "py_compile passed",
+    "validate_vla_dryrun_jsonl.py passed and generated the Markdown report",
+    "result_checker.py passed"
+  ],
+  "key_logs": [
+    "[OK] task_0006_vla_dryrun_jsonl_fixture_and_static_validator passed guard checks",
+    "Read only the task JSON and declared task_0005 read-only files",
+    "Created a four-event JSONL fixture covering left_abs_8d, dual_delta_14d, observation_missing, and safety_gate_blocked",
+    "Validator checks required top-level fields, schema_version, unique event_id, action-family/vector length consistency, safety_gate shape, critic taxonomy labels, and artifact_refs shape",
+    "Validation report status is PASS"
+  ],
+  "issues": [
+    "The fixture uses synthetic artifact references only; it does not read or validate real image/log files.",
+    "The validator is intentionally static and schema-focused; it does not evaluate model quality, robot readiness, or live controller behavior."
+  ],
+  "next_recommendation": [
+    "Create a follow-up task to add intentionally invalid negative fixtures and confirm the validator fails with clear errors, still without touching robot code, datasets, checkpoints, rosbags, or live services."
+  ]
+}
